@@ -1,0 +1,43 @@
+\documentclass{standalone}
+\usepackage{tumcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{units}
+
+\usepackage[binary-units]{siunitx}
+\DeclareSIUnit[per-mode=symbol]\bps{\bit \per \second}
+\DeclareSIUnit[per-mode=symbol]\kbps{\kilo\bps}
+\DeclareSIUnit[per-mode=symbol]\Mbps{\mega\bps}
+\DeclareSIUnit[per-mode=symbol]\Gbps{\giga\bps}
+\sisetup{detect-all}
+
+\begin{document}
+\begin{tikzpicture}
+
+% Read data from CSV file
+\pgfplotstableread[col sep = semicolon]{data/testdata.csv}\data
+
+\begin{axis}[
+	width=10cm,
+	height=5cm,
+	xmin = 0, xmax = 10,
+	ymin = 0, ymax = 10,
+	xlabel={Time},
+	ylabel={Rate},
+	x unit = \si{\milli \second},
+	y unit = \si{\Mbps},
+	scaled ticks=false,
+	tick label style={/pgf/number format/fixed},
+	no marks,
+	grid=both,
+	legend pos = south east,
+]
+	\addplot[TUMRed, domain=0:10, samples=500] {0.04* (x-5)^3 + 5};
+	\addplot[TUMBlue, only marks, samples=100] table[x index = {0}, y index = {1}]{\data};
+
+	\legend{Estimation, Samples}
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

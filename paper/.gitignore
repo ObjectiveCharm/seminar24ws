@@ -1,0 +1,11 @@
+build
+*.pdf
+!pics/*.pdf
+.*
+*.log
+*.aux
+*.swp
+*.swo
+*.bbl
+*.blg
+*.synctex.gz

@@ -1,0 +1,46 @@
+\section{Structure}
+After copying the template to your git repository make sure you also
+copied the (hidden) \texttt{.gitignore} file.
+You also find additional directories which are explained in the following:
+
+\begin{figure*}
+		\centering
+	\begin{subfigure}[c]{0.45\textwidth}
+				\centering
+		\includegraphics[width=.4\textwidth]{pics/example}
+		\subcaption{An external figure.}
+		\label{fig:external_pdf}	
+	\end{subfigure}
+	\begin{subfigure}[c]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{figures/example}
+		\subcaption{An external figure which was built before included.}
+		\label{fig:external_tex}
+	\end{subfigure}
+	\caption{This Figure has two subfigures and spans both columns.}
+\end{figure*}
+
+
+\begin{itemize}
+	\item[\texttt{/pics}:] Here you can put all external figures which are
+	not built for the paper. These are, for example, PNG or JPG files and
+	vector graphics like PDF files. For an example have a look at
+	Figure~\ref{fig:external_pdf}.
+	
+	\item[\texttt{/figures}:] If you do not want to build all your figures
+	every time you compile your paper it is helpful to build them
+	separately. All \texttt{.tex} and \texttt{.tikz} files within this directory
+	are built automatically by the Makefile. Since these figures are built
+	independently of the main document they have to be of type
+	\texttt{standalone}. Make sure that you put no \texttt{.tex} or
+	\texttt{.tikz} inside this directory which cannot be compiled
+	independently.
+	Figure~\ref{fig:external_tex} is an example for this. Notice that this
+	PDF is only built if the figures source file has changed.
+	
+	\item[\texttt{/data}:] If you have larger amounts of data which you
+	want to put into your paper, for example in form of a table or a plot
+	you can import the data directly from another file.
+	Figure~\ref{fig:external_tex} reads the red sample points from a CSV
+	file located in this directory.
+\end{itemize}
+
