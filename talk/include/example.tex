@@ -1,0 +1,64 @@
+\section{Section heading}
+
+\begin{frame}
+    \frametitle{Example frame}
+    \begin{itemize}
+        \item item 1
+        \item $\ldots$
+        \begin{itemize}
+            \item test
+            \item $\ldots$
+        \end{itemize}
+    \end{itemize}
+    Citation \cite{rfc959}\footnote{A footnote}
+
+    \paragraph{Math mode should be fully functional:}
+    $$
+    \hat s
+    \overline s
+    \mathcal S
+    \mathbit S
+    \mathbit \Lambda
+    \sum
+    \pd{\xi}
+    \pr{X=0}
+    \mathbit 1
+    $$
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+		\item Add dynamic effects like this:
+		\item<1> This is only on slide 1
+		\item<1-> This shows
+		\item<2-> up incrementally
+		\item This also works for Figures
+    \end{itemize}
+
+    \frametitle{Figures}
+    \begin{figure}
+        \centering
+        \includegraphics<1>[width=.5\textwidth, page=1]{figures/example}
+        \includegraphics<2->[width=.5\textwidth, page=2]{figures/example}
+        \caption{Figure caption}
+        \label{Maizaso0}
+    \end{figure}
+    Figure~\ref{Maizaso0} shows a small network.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Figures}
+    \begin{table}
+        \begin{tabular}{rccc}
+            \toprule
+            & Competitor 1 & Competitor 2 & we\\
+            \midrule
+            Feature A & \no & \maybe & \yes\\
+            Feature B & \no & \maybe & \yes\\
+            \pause
+            Feature C & \no & \maybe & \yes\\
+            Feature D & \no & \maybe & \yes\\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+\end{frame}
