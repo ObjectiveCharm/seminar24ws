@@ -34,7 +34,7 @@
 	legend pos = south east,
 ]
 	\addplot[TUMRed, domain=0:10, samples=500] {0.04* (x-5)^3 + 5};
-	\addplot[TUMBlue, only marks, samples=100] table[x index = {0}, y index = {1}]{\data};
+	\addplot[TUMBlue, only marks] table[x index = {0}, y index = {1}]{\data};
 
 	\legend{Estimation, Samples}
 \end{axis}
