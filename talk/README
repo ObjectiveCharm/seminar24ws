@@ -11,10 +11,6 @@ Dependencies
 
 In order to compile the template you need the following packages:
     texlive-full >= 2015
-    make
-
-For markdown support (optional) you additionally need:
-    pandoc
 
 Tested under Linux (Debian) and OSX only.
 

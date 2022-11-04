@@ -45,10 +45,10 @@
 \def\tumbeamer@sep{\ \ ---\ \ }
 
 \LoadClassWithOptions{beamer}
-\RequirePackage[rgb]{tumcolor}
+\RequirePackage[rgb]{tumcd/tumcolor}
 \RequirePackage{iflang}
-\RequirePackage{tumcontact}
-\RequirePackage{tumlang}
+\RequirePackage{tumcd/tumcontact}
+\RequirePackage{tumcd/tumlang}
 \RequirePackage{xparse}
 \RequirePackage{totcount}
 \RequirePackage{caption}
