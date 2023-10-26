@@ -1,0 +1,14 @@
+== seminar ==
+
+99. "Media Access Control -- CSMA/CD in Today's Ethernet"
+99. "Media Access Control -- CSMA/CA in Wireless Networks"
+99. "Switching and redundancy on layer 2"
+99. "Interior Gateway Protocols"
+99. "Policy based Routing"
+99. "Moving from IPv4 to IPv6"
+99. "Networks with different purposes: Storage"
+99. "TCP -- Variants and Implementations-specific Differences"
+99. "QUIC -- Shortcomings and Improvements over TCP"
+99. "The Onion Router (TOR)"
+99. "Content Delivery Networks"
+99. "Domain Name System -- The Largest Distributed System in the World"
