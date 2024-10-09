@@ -1,6 +1,6 @@
 % Do not change the section below
 % ============================================================================
-\documentclass[conference,compsoc,a4paper]{common/IEEEtran}
+\documentclass[conference,compsoc,a4paper]{IEEEtran}
 \IEEEoverridecommandlockouts
 
 \usepackage{nimbusmononarrow}
@@ -29,9 +29,11 @@
 	detect-all,
 	binary-units=true,
 ]{siunitx}
+\DeclareSIUnit{\nothing}{\relax}
+
 \usepackage{booktabs}
 \usepackage{tikz}
-\usepackage{common/moeptikz}
+\usepackage{moeptikz}
 % ============================================================================
 
 
@@ -50,9 +52,8 @@
 		Advisor's Name\IEEEauthorrefmark{1}
 	}
 	\IEEEauthorblockA{%
-		\IEEEauthorrefmark{1}Chair of Network Architectures and Services,
-		Department of Informatics\\
-		Technical University of Munich, Germany\\
+		\IEEEauthorrefmark{1}Chair of Network Architectures and Services\\
+		School of Computation, Information and Technology, Technical University of Munich, Germany\\
 		Email: your@mail.address, advisor@net.in.tum.de
 	}
 }

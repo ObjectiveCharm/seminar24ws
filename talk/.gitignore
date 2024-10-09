@@ -2,6 +2,8 @@ slides.pdf
 build/
 *.tar.gz
 
+figures/*.pdf
+
 # common editor backups
 .*.sw?
 *~

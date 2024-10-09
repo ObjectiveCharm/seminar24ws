@@ -45,10 +45,10 @@
 \def\tumbeamer@sep{\ \ ---\ \ }
 
 \LoadClassWithOptions{beamer}
-\RequirePackage[rgb]{tumcd/tumcolor}
+\RequirePackage[rgb]{tumcolor}
 \RequirePackage{iflang}
-\RequirePackage{tumcd/tumcontact}
-\RequirePackage{tumcd/tumlang}
+\RequirePackage{tumcontact}
+\RequirePackage{tumlang}
 \RequirePackage{xparse}
 \RequirePackage{totcount}
 \RequirePackage{caption}
@@ -495,13 +495,13 @@
             \thevenue{}%
         \fi%
         \\[4ex]%
-        \ifdefined\departmentname%
-            \ifdefined\chairname%
-                \chairname\\%
+        \ifdefined\school%
+            \ifdefined\chair%
+                \chair\\%
             \fi%
-            \departmentname\\%
+            \school\\%
         \fi%
-        \TUMname\\%
+        \orgname\\%
     \end{frame}
     \setbeamertemplate{footline}[tumfootline]
 }
@@ -552,13 +552,13 @@
             \thevenue{}%
         \fi%
         \\[4ex]%
-        \ifdefined\departmentname%
-            \ifdefined\chairname%
-                \chairname\\%
+        \ifdefined\school%
+            \ifdefined\chair%
+                \chair\\%
             \fi%
-            \departmentname\\%
+            \school\\%
         \fi%
-        \TUMname\\%
+        \orgname\\%
     \end{frame}
     \setbeamertemplate{footline}[tumaltfootline]%
 }
@@ -600,13 +600,13 @@
         \strut\theassistants%
         \\[4ex]%
         \normalsize%
-        \ifdefined\departmentname%
-            \ifdefined\chairname%
-                \chairname\\%
+        \ifdefined\school%
+            \ifdefined\chair%
+                \chair\\%
             \fi%
-            \departmentname\\%
+            \school\\%
         \fi%
-        \TUMname\\%
+        \orgname\\%
     \end{frame}%
     \setbeamertemplate{footline}[lecturefootline]%
 }
