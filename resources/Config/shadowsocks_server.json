@@ -1,0 +1,6 @@
+{
+    "server": "<your_server_ip>",
+    "server_port": "<your_server_port>",
+    "password": "<your_password>",
+    "method": "aes-256-gcm"
+}

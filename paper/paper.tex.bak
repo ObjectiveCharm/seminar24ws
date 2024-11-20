@@ -1,0 +1,97 @@
+% Do not change the section below
+% ============================================================================
+\documentclass[conference,compsoc,a4paper]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{nimbusmononarrow}
+\usepackage[T1]{fontenc}
+
+\usepackage{balance}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{url}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\newcommand{\fixme}[1]{\textcolor{red}{[FIXME: #1]}}
+% ============================================================================
+
+
+% Add additionale LaTeX packages if needed here
+% ============================================================================
+\usepackage[%
+	detect-all,
+	binary-units=true,
+]{siunitx}
+\DeclareSIUnit{\nothing}{\relax}
+
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{moeptikz}
+% ============================================================================
+
+
+\begin{document}
+
+% Add paper title here, most likely you want to delete the \thanks{} macro
+% ============================================================================
+\title{Paper Title}
+% ============================================================================
+
+% Update author information
+% ============================================================================
+\author{%
+	\IEEEauthorblockN{%
+		Your Name,
+		Advisor's Name\IEEEauthorrefmark{1}
+	}
+	\IEEEauthorblockA{%
+		\IEEEauthorrefmark{1}Chair of Network Architectures and Services\\
+		School of Computation, Information and Technology, Technical University of Munich, Germany\\
+		Email: your@mail.address, advisor@net.in.tum.de
+	}
+}
+% ============================================================================
+
+\maketitle
+
+% Edit include/abstract.tex to write your paper's abstract
+% ============================================================================
+\begin{abstract}
+\input{include/abstract}
+\end{abstract}
+% ============================================================================
+
+% List keywords of your paper in lower-case below
+% ============================================================================
+\begin{IEEEkeywords}
+software-defined networks, measurement, hight-speed networks
+\end{IEEEkeywords}
+% ============================================================================
+
+
+% For each section of your chapter add one source file in the include folder
+% ============================================================================
+\input{include/introduction}
+\input{include/related_work}
+\input{include/formatting}
+\input{include/structure}
+\input{include/conclusion}
+% ============================================================================
+
+
+% Put your references in the paper.bib file
+% ============================================================================
+\balance
+
+\bibliographystyle{IEEEtran}
+\bibliography{paper}
+% ============================================================================
+
+\end{document}

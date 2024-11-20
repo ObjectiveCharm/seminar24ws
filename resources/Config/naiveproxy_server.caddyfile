@@ -1,0 +1,20 @@
+
+{
+	order forward_proxy before file_server
+}
+
+:443, <your_domain>
+tls <your_email>
+
+route {
+	forward_proxy {
+		basic_auth <your_username> <your_password>
+		ports 443
+		hide_ip
+		hide_via
+		probe_resistance <fallback_domain>
+	}
+	file_server {
+		root /var/www/html
+	}
+}

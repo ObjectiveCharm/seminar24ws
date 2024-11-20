@@ -23,6 +23,17 @@ def plot_occurrence_of_length(save_path: PcapAnalyse, **kwargs: os.path):
         plt.savefig(save_path, format='png')
     plt.show()
 
+def plot_single_occurrence_of_length(save_path: os.path, analyse: PcapAnalyse):
+    fig, ax = plt.subplots()
+    hist, bins = occurrence_histogram(analyse, 5)
+    ax.hist(hist, bins=bins)
+    ax.set_title(f'{analyse.protocol_name}')
+    ax.set_xlabel('Length')
+    ax.set_ylabel('Occurrence')
+    if not __debug__:
+        plt.savefig(save_path, format='png')
+    plt.show()
+
 # The temporal statistics of length for every packet for a single protocol
 # We should combine it to a plot in order to compare between different protocols
 def plot_length_statistic_of_protocol_in_temporal_domain(analyse: PcapAnalyse, fig, ax):
@@ -30,7 +41,7 @@ def plot_length_statistic_of_protocol_in_temporal_domain(analyse: PcapAnalyse, f
     ax.plot(ts, data, label=analyse.protocol_name)
 
 # The combination of all the protocols' graphs
-def plot_length_statistic_in_temporal_domain( save_path: os.path, **kwargs: PcapAnalyse):
+def plot_length_statistic_in_temporal_domain(save_path: os.path, **kwargs: PcapAnalyse):
     fig = plt.figure(figsize=(15, 20))
     fig.tight_layout()
     plt.subplots_adjust(hspace=0.2, wspace=0.3)
@@ -56,3 +67,18 @@ def plot_length_statistic_in_temporal_domain( save_path: os.path, **kwargs: Pcap
     if not __debug__:
         plt.savefig(save_path, format='png')
     plt.show()
+def plot_single_length_statistic_in_temporal_domain(save_path: os.path, analyse: PcapAnalyse):
+    fig, ax = plt.subplots()
+    ax.set_xlim(0, 120)
+    ax.set_ylim(0, 3000)
+    ax.set_xticks(np.arange(0, 120, 10))
+    # ax.set_yticks(np.arange(0, 600, 100))
+    ts, data = temporal_length_array(analyse)
+    line = ax.plot(ts, data, label=analyse.protocol_name)
+    ax.set_title(f'{analyse.protocol_name}')
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Length')
+    if not __debug__:
+        plt.savefig(save_path, format='png')
+    plt.show()
+

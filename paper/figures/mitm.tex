@@ -1,0 +1,20 @@
+
+
+\begin{tikzpicture}[
+    scale=0.4, % Further reduced scale
+    node distance=2cm, % Further reduced distance
+    user/.style={circle,draw,minimum size=0.6cm},
+    attacker/.style={rectangle,draw,fill=red!20,minimum width=1cm,minimum height=0.7cm},
+    server/.style={rectangle,draw,minimum width=1cm,minimum height=0.7cm}
+]
+    % Define nodes with shorter labels
+    \node[user] (alice) {A};
+    \node[attacker] (mitm) [right of=alice] {M};
+    \node[server] (server) [right of=mitm] {S};
+
+    % Shorter arrows and smaller labels
+    \draw[->,thick] (alice) to[bend left=20] node[above,font=\tiny] {Msg} (mitm);
+    \draw[->,thick] (mitm) to[bend left=20] node[above,font=\tiny] {Mod} (server);
+    \draw[->,thick] (server) to[bend left=20] node[below,font=\tiny] {Rsp} (mitm);
+    \draw[->,thick] (mitm) to[bend left=20] node[below,font=\tiny] {Mod} (alice);
+\end{tikzpicture}

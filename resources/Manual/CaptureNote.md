@@ -1,4 +1,4 @@
-## find active interface cmd
+## find active interface cmd for macOS
 ```
     networksetup -listallhardwareports
 ```
