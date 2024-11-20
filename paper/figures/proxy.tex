@@ -1,3 +1,5 @@
+\usepackage{tikz}
+\begin{document}
 \begin{tikzpicture}[
     scale=0.4,
     node distance=2cm,
@@ -20,3 +22,4 @@
     \draw[->,thick] (server) to[bend left=20] node[below,font=\tiny] {Rsp} (proxy);
     \draw[->,thick] (proxy) to[bend left=20] node[below,font=\tiny] {Enc} (user);
 \end{tikzpicture}
+\end{document}

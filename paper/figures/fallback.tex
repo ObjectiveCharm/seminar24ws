@@ -1,3 +1,5 @@
+\usepackage{tikz}
+\begin{document}
  \begin{tikzpicture}[
     scale=0.4, % Further reduced scale
     node distance=2cm, % Further reduced distance
@@ -30,3 +32,4 @@
     \draw[->] (proxy) to node[above, font=\tiny] {FWD} (destination);
     \draw[dashed] (proxy) to[bend left=20] node[above, font=\tiny] {FB} (webserver);
 \end{tikzpicture}
+\end{document}
