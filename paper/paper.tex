@@ -180,7 +180,7 @@ Such attack utilizes the nature of asymmetrical encryption and key exchange proc
 
 \begin{figure}[!h]
 \centering
-\input{figures/mitm}
+\input{include/mitm}
 \caption{MITM attack: Attacker (M) intercepts messages between sender (A) and server (S).}
 \label{fig:mitm}
 % \vspace{-0.2cm}
@@ -235,7 +235,7 @@ Generally speaking, proxies and VPNs are based on the idea of "Side Channel", wh
 
 \begin{figure}[!h]
 \centering
-\input{figures/proxy}
+\input{include/proxy}
 \caption{Proxy-based network bypass: User (U) connects to server (S) through proxy (P), bypassing firewall restrictions (FW). Encrypted tunnel (Enc) prevents content inspection.}
 \label{fig:proxy}
 % \vspace{-0.2cm}
@@ -281,7 +281,7 @@ After the active probing mechanism was revealed, most HTTPS-based protocols adop
 
 \begin{figure}[!h]
     \centering
-    \include{figures/fallback}
+    \include{include/fallback}
     \caption{Fallback: Proxy servers filter (P) unauthentic incoming traffic (P) (Probes) and forward it to a real HTTP Server (F) and forward authentic traffic (C) to destination (D)}
     \label{fig:fallback}
 \end{figure}
