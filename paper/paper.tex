@@ -42,7 +42,7 @@
 \maketitle
 
 \begin{abstract}
-This paper review and discussion the adversary between censorship and approaches to circumvent those restrictions from technical perspective
+This paper reviews and discusses the adversary between censorship and approaches to circumvent those restrictions from technical perspective
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -89,7 +89,7 @@ Passive detection means that the censor analyzes the traffic that goes through t
  The most straightforward way to decide whether a connection is valid is to retrieve the carried payload and censor it. But in the age of AEAD and HTTPS/SSL, it will always become complicated (or can only be partially implemented in a very stringent condition like an attack which utilizes a classical vulnerability Heartbleed \cite{Heartbleed} (In most scenarios, it has been patched).
  \begin{itemize}
     \item  For symmetric-key algorithms, some extremely old encryptions before The Advanced Encryption Standard(AES), such as single DES and RC-4 can be solved in a reasonable time. But generally speaking, that is not a feasible approach. Nowadays, most protocols (both TLS and non-TLS based) have widely adopted AES algorithms.
-    \item - There can be more chances when we consider the asymmetric-key exchange phases, which only happen when a TLS-based protocol tries to establish. For example, MITM Attack, but I will elaborate in the following module, which goes on “Active Probing” since it needs to intercept and tamper packets. Shor’s Algorithm \cite{Shors_Algorithm} also provides a possibility to solve the question in polynomial time. Still, due to versatile technical limitations, it’s generally not practical (such an existing quantum computer’s capability is like "it could tell you there is 70\% chance 15 = $3\times$5").
+    \item  There can be more chances when we consider the asymmetric-key exchange phases, which only happen when a TLS-based protocol tries to establish. For example, MITM Attack, but I will elaborate in the following module, which goes on “Active Probing” since it needs to intercept and tamper packets. Shor’s Algorithm \cite{Shors_Algorithm} also provides a possibility to solve the question in polynomial time. Still, due to versatile technical limitations, it’s generally not practical (such an existing quantum computer’s capability is like "it could tell you there is 70\% chance 15 = $3\times$5").
  \end{itemize}
 
 \subsubsection{Entropy}
@@ -170,7 +170,7 @@ We depicted The variations of different protocols in the temporal domain. It is 
 \subsubsection{Other Miscellaneous Factors}
 There are also some miscellaneous outstanding characteristics, such as the structure of packets, special headers or bits (which is in even plaintext when a handshake happens). Classical VPNs and standard proxies that are not designed with the intention of providing censor bypass capability always have these characteristics. That's the reason most of industrial routers/gateways can distinguish and mark traffic as OpenVPN or Wireguard.
 
-\subsection{The Active Detecion}
+\subsection{The Active Detection}
 Active detection can be used as a supplement, but it is not so widely adopted as passive inspection (But in authoritarian countries that have an extreme network censor it is adopted), the main reason is scanning, probing, and sniffing are always regarded as "sensible" activities and associated with suspicious Hack activities. But for national-level censors, they can control a large scale of malicious Bot Net. Because they have not only resources (of course, money from taxpayers) but also control the infrastructures of the backbone network.
 
 \subsubsection{Man in the Middle Attack}
