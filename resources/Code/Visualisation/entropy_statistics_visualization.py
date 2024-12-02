@@ -36,7 +36,7 @@ def plot_single_temporal_entropy_statistic_of_protocol_in_temporal_domain(save_p
     ts, data = calculate_entropy_per_packet(analyse)
     ax.plot(ts, data, label=analyse.protocol_name)
     ax.set_title(f'{analyse.protocol_name}')
-    ax.set_xlabel('Time')
+    ax.set_xlabel('Time (seconds)')
     ax.set_ylabel('Entropy')
     if not __debug__:
         plt.savefig(save_path, format='png')

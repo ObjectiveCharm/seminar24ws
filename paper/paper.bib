@@ -1,4 +1,4 @@
-@article{Heartbleed,
+@INPROCEEDINGS{Heartbleed,
   author={Kyatam, Shashank and Alhayajneh, Abdullah and Hayajneh, Thaier},
   booktitle={2017 IEEE Long Island Systems, Applications and Technology Conference (LISAT)},
   title={Heartbleed attacks implementation and vulnerability},
@@ -110,15 +110,57 @@ note = {Figure 3}
 }
 @article{Trojan-Probe,
 title = {TrojanProbe: Fingerprinting Trojan tunnel implementations by actively probing crafted HTTP requests},
-journal = {Computers & Security},
+journal = {Computers \& Security},
 volume = {148},
 pages = {104147},
 year = {2025},
 issn = {0167-4048},
 doi = {https://doi.org/10.1016/j.cose.2024.104147},
-url = {https://www.sciencedirect.com/science/article/pii/S0167404824004528},
+url = {\url{https://www.sciencedirect.com/science/article/pii/S0167404824004528}},
 author = {Liuying Lv and Peng Zhou},
 keywords = {Hidden tunnel, Active fingerprinting, Censorship, Code audit, Anti-identifiability},
 abstract = {Trojan Probe},
 note = {Figure 2}
 }
+
+@misc{dpkt,
+	title = {kbandla/dpkt},
+	url = {https://github.com/kbandla/dpkt},
+	author = {Wylie, Brian and crocogorical and Oscar and E, Guillaume and Sun, Hao and Druzhynin, Alexander and McConachie, Andrew and Rodrigues, Dustin and Pfeiffer, Szilárd and sunhao2013 and Desgrange, Rémi and Little, James and Hand, Scott and Hanafy, Amgad and Vetter, Simon and Yefremov, Yegor and Mlcoch, Tomas and Schwaggot and Hansen, Richard and Martijn and Metz, Joachim and Oikonomou, George and Cooper, Enji and Catmur, Ed and Uittenbroek, Peter and Cope, Robert P. and Kurauchi, Yoshiyuki and andrew-bolin and Patterson, Joe and Bandla, Kiran},
+	date = {2024-07-26},
+	year = {2024},
+	month = {7},
+	day = {26},
+    note = {[Accessed 1-12-2024]}
+}
+
+@misc{tcpdump,
+  author = {{The Tcpdump Group}},
+  title = {Tcpdump and {Libpcap}},
+  year = {2024},
+  howpublished = {\url{https://www.tcpdump.org/}},
+  note = {Accessed: 2024-12-01}
+}
+@article{domainfronting,
+  author    = {David Fifield and Chang Lan and Rod Hynes and Percy Wegmann and Vern Paxson},
+  title     = {Blocking-resistant communication through domain fronting},
+  journal   = {Proceedings on Privacy Enhancing Technologies (PoPETs)},
+  volume    = {2015},
+  number    = {2},
+  pages     = {46--64},
+  year      = {2015},
+  doi       = {10.1515/popets-2015-0009},
+  url       = {https://petsymposium.org/popets/2015/popets-2015-0009.php},
+  keywords  = {censorship circumvention}
+}
+@misc{meek,
+  author = {{The Tor Project Anti-censorship Developers}},
+  title = {Meek },
+  year = {2024},
+  howpublished = {\url{https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/meek}},
+  note = {Accessed: 2024-12-02}
+}
+
+ @article{shadowsocks_analysis, title={Security Analysis of Shadowsocks(R) Protocol}, volume={2022}, rights={Copyright © 2022 Qingbing Ji et al.}, ISSN={1939-0122}, DOI={10.1155/2022/4862571}, abstractNote={Shadowsocks(R) is a proxy software based on Socks5, which is the collective name of shadowsocks and shadowsocksR. Shadowsocks(R) is a private protocol without a handshake negotiation mechanism. Peng broke the confidentiality of shadowsocks by exploiting vulnerability in the shadowsocks protocol and decrypted the shadowsocks packets encrypted with none-AEAD encryption options using a redirection attack. Chen et al. started with the cryptographic algorithm used by shadowsocks(R) and preliminarily discussed the confidentiality of user data under the protection of shadowsocks(R) in theory. Based on Chen’s work, this paper further clarifies the shadowsocks(R) protocol format and studies the encryption mechanism of shadowsocks(R) from the perspective of protocol analysis. The vulnerability of the shadowsocks(R) encryption mechanism is found, and an attack method of shadowsocks(R) is proposed. The attack method is a passive attack and can decrypt the shadowsocks packets encrypted with any encryption option. Compared with Peng’s attack method, the method is more effective and more suitable for actual attacks. Finally, some methods to improve the protocol security of shadowsocks(R) are proposed.}, number={1}, journal={Security and Communication Networks}, author={Ji, Qingbing and Rao, Zhihong and Chen, Man and Luo, Jie}, year={2022}, pages={4862571}, language={en} }
+
+
