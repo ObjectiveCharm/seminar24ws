@@ -109,7 +109,7 @@ We have made the code available in the seminar repository.
 \section{The Censor}
 Almost all firewalls try to restrict only specific traffic, with interference in authorized connections as little as possible, so there is a need for mechanisms to distinguish between valid and invalid connection attempts.
 
-\subsection{The detection}\label{sec:detecion}
+\subsection{The detection}\label{sec:detection}
 Generally speaking, two kinds of approaches try to achieve this goal: passive tests, which try to analyze the existing data and figure out characteristics and patterns that make a disguised traffic identifiable, and active probes, which use measurements such as replay attack, tampering data, and man-in-the-middle attack. We discuss different approaches that try to distinguish "unauthorized" traffic.
 
 \subsection{The Passive Detection}
@@ -136,7 +136,7 @@ Here is the overall entropy of each proxy protocol
 \begin{tabular}{|l|lllll|}
 \hline
 \multirow{2}{*}{} & \multicolumn{5}{c|}{Protocol Name}                                                                                                   \\ \cline{2-6}
-                  & \multicolumn{1}{l|}{Shadosocks} & \multicolumn{1}{l|}{HTTPS} & \multicolumn{1}{l|}{NaiveProxy} & \multicolumn{1}{l|}{Trojan} & Obfs4 \\ \hline
+                  & \multicolumn{1}{l|}{Shadowsocks} & \multicolumn{1}{l|}{HTTPS} & \multicolumn{1}{l|}{NaiveProxy} & \multicolumn{1}{l|}{Trojan} & Obfs4 \\ \hline
 Entropy          & \multicolumn{1}{l|}{7.999}      & \multicolumn{1}{l|}{7.977} & \multicolumn{1}{l|}{7.992}      & \multicolumn{1}{l|}{7.858}  & 7.999 \\ \hline
 \end{tabular}%
 }
