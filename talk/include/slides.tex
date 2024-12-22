@@ -1,46 +1,306 @@
-\usepackage[utf8]{inputenc}
-\usepackage{packages}
-\usepackage{beamermods}
 
-% For beamer mode (default):
-\author[S. G\"unther]{Stephan Günther}
-\title[Networking]{Something with Networking}
+% End video
 
-% Uncomment to add advisors for presentation in Oberseminar
-%\advisor{Herrmann B. Wolfgang}
+% Header
+% \newcommand{\zwischentitel}{Seminar Presentation}
+% \newcommand{\leitthema}{Title}
+% End Header
 
-% Uncomment to add type for presentation in Oberseminar
-% Usage: \thesistype{intermediate | final}{bachelor | master | idp | gr}
-%\thesistype{intermediate}{gr}
-
-% Uncomment to configure date in dd-mm-yyyy format
-%\newdate{date}{25}{05}{2017}
-%\date{\displaydate{date}}
-
-% Uncomment to add a venue to the title slide
-%\venue{International Conference on Conferencing 2018 \\ Garching b. München, Germany}
-
-% For lecture mode (use package option 'lecture'):
-%\lecture[GRNVS]{Grundlagen Rechnernetze und Verteilte Systeme}
-%\module{IN0010}
-%\semester{SoSe\,2016}
-%\assistants{Johannes Naab, Stephan Günther, Maurice Leclaire}
+% Titlepage
+% \title{The Eternal Adversary between Censor and
+% Circumvention}
+% \author{Guanru Chen}
+% \newcommand{\presdatum}{December 2024}
+% \institute
+% {
+%   Technische Universität München\\
+% }
+% \subtitle{ Technical Perspective}
+% End Titlepage
 
 
-\usepackage{pgfpages}
-\usepackage{ifthen}
-% ============================================================================
-% jobname solution
-% ============================================================================
-\newif\ifsolution%
-\ifthenelse{\equal{\detokenize{notes}}{\jobname}}{%
-\setbeameroption{show notes on second screen=bottom}
-\setbeamercolor{note page}{bg=white, fg=black}
-\setbeamercolor{note title}{bg=white!95!black, fg=black}
-}{
-}
+% Slides
+% \begin{document}
 
-% TeXLive 2018 compatibility: https://tex.stackexchange.com/questions/426088/texlive-pretest-2018-beamer-and-subfig-collide
-\makeatletter
-\let\@@magyar@captionfix\relax
-\makeatother
+% 1. Slide: Titlepage
+% \begin{frame}
+% 	\titlepage
+% \end{frame}
+
+% 2. Slide: TOC
+\begin{frame}
+   \frametitle{Contents and sections of presentation}
+   \tableofcontents[subsectionstyle=hide]
+\end{frame} 
+
+% Further Slides
+% \section{Titles} 
+% \begin{frame}
+%    \frametitle{Title} 
+%    Each frame should have a title.
+% \end{frame}
+
+\section{Prologue}
+\begin{frame}
+    % \frametitle{Prologue}
+    \begin{quote}
+        ``Life is dear, love is dearer. Both can be given up for freedom.`` \\
+        --- Sandor Petöfi
+    \end{quote}
+    
+\end{frame}
+
+\section{Methods}
+\subsection{Data Collection}
+\begin{frame}
+Some common ways to collect network traffic in different OSI layers
+\small
+\begin{itemize}
+    \item HTTP(s) Proxies like Charles Proxy, fiddler, and Proxyman, are widely used in web debugging. When you open the developer tool in your browser, you are actually analyzing network traffic. 
+    \item Packet capture tools that integrated with systems' network stack. The most famous and classic example is TCPDump and Wireshark.
+    There is a new remarkable approach in the Linux platform called eBPF (extended Berkeley Packet Filter), which is the successor of the classic BPF (Berkeley Packet Filter). It is an interesting and popular topic that is worth further investigation. For portability reasons, in our research, we still use the classical one. 
+    \item Physical layer collection needs more special equipment, such as optical splitters and optical fiber detectors, that makes it possible to capture modulated physical signals. It is not so common, but it can still be utilized by national agencies.
+\end{itemize}
+
+\end{frame}
+
+% \begin{frame}\frametitle{Lists with Pause}
+%    \begin{itemize}
+%       \item Introduction to  \LaTeX \pause 
+%       \item Second bullet point \pause 
+%       \item And a third one \pause 
+%       \item The last one
+%    \end{itemize} 
+% \end{frame}
+
+% \begin{frame}{Use TCPDump Tool}
+% \begin{lstlisting}[language=bash]
+%     tcpdump -G <capture interval> -W 1 -w <protocol name>.pcap -i <network interface> -n dst host <ip> and dst port <port> and <transmission protocol> --print
+% \end{lstlisting}
+% Specifying the enclosed parameters accordingly provides flexibility to filter traffic and interact with it.
+% \end{frame}
+
+\subsection{Use TCPDump \cite{tcpdump} Tool}
+\begin{frame}[fragile]
+% \frametitle{Use TCPDump \cite{tcpdump} Tool}
+    TCPDump can capture, filter, and store designated traffic with given parameters. For more detail, please refer to its \href{https://www.tcpdump.org/}{manual}
+   \lstset{language=bash, basicstyle=\small \ttfamily, showspaces=false,   showtabs=false, tab= , keywordstyle=\bfseries,     showstringspaces=false, framexleftmargin=5mm, frame=single,     numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    texcl=true, 
+    breaklines=true,
+    breakatwhitespace=true,
+    keepspaces=true,
+    columns=fullflexible,}
+    \begin{lstlisting}
+    tcpdump -G <capture interval> -W 1 -w <protocol name>.pcap -i <network interface> -n dst host <ip> and dst port <port> and <transmission protocol> --print
+    \end{lstlisting}
+    Specifying the enclosed parameters accordingly provides flexibility to filter traffic and interact with it.
+    It is possible to automate the process in order to collect larger-scale datasets.
+\end{frame}
+
+
+\subsection{Data Analysis and Plot}
+\begin{frame}
+% \frametitle{Data Analysis and Plot}
+
+\small
+Regarding passive (static) traffic analysis, we consider these factors: packet length, entropy, TLS fingerprint (if it has one), and those factors in the temporal domain.
+We should retrieve encrypted TCP payload from captured Ethernet frames first. 
+For analysis, we use library dpkt \cite{dpkt} and for visualization we use \href{https://matplotlib.org/}{matplotlib}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.35]{pics/plot.png}
+    \caption{\tiny A sample plot of Shadowsocks protocol.}
+    \label{fig:enter-label}
+\end{figure}
+    
+\end{frame}
+
+\subsection{Server Configuration}
+\begin{frame}
+    % \frametitle{Server Configuration}
+
+    A few configurations may be needed to set up a proxy server.
+
+    \begin{itemize}
+    \item Install the server-side software, use package manager if possible.
+    \item Basic configuration. It will be required for almost all proxy protocols, in which you provide basic information, e.g. address, port to listen, and credentials for authorization.  
+    \item Obtain a SSL certificate if TLS should be used and maintain it e.g. renew it timely and adapt security response.
+    \item Set up a fallback server (more details of fallback we will discuss later in section \ref{sec:fallback}).
+    \end{itemize}
+\end{frame}
+
+\subsection{Protocols}
+\begin{frame}
+    % \frametitle{Protocols to Research}
+    We choose some typical protocols according to their features.
+    \begin{table}[h]
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      \diagbox{Protocol}{Feature} & TLS & Packet Length Padding & Fallback \\ \hline
+      Shadowsocks\cite{Shadowsocks} & \texttimes & \checkmark & \texttimes \\ \hline
+      Obfs4\cite{Obfs4} & \texttimes & \checkmark & \texttimes \\ \hline
+      Trojan\cite{Trojan_gfw} & \checkmark & \texttimes & \checkmark \\ \hline
+      Naiveproxy\cite{Naiveproxy} & \checkmark & \checkmark & \checkmark \\ \hline
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+\subsection{Technical Details}
+\subsection{Fallback}\label{sec:fallback}
+\begin{frame}
+    % \frametitle{Fallback}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.20]{pics/fallback.png}
+        \caption{How fallback works in combat of probe \cite{Trojan-Probe}}
+        \label{fig:fallback}
+    \end{figure}
+\end{frame}
+
+\subsection{Supportive resources}
+\begin{frame}
+% \frametitle{Supportive Resources}
+    We publish related files in \href{https://gitlab.lrz.de/tuinh09/teaching/scni/repos/2024ws-hn/u157}{the project's repository}
+    \begin{itemize}
+        \item Configuration snippets can be found under folder \texttt{resources/Config}. "$<>$" enclosed values should be replaced accordingly.
+        \item Manuals and notes are under folder \texttt{resources/Manual}.
+    \end{itemize}
+    
+\end{frame}
+
+\section{Topics}
+\subsection{Entropy}
+\begin{frame}
+    % \frametitle{Entropy}
+    The entropy can be calculated as $H = -\sum_{i=1}^{n} p_i \log_2(p_i)$. It represents how disordered a message is. Highly encrypted messages are near to random data.
+    It is also practical to consider the variation of entropy in the clock domain.
+    \begin{table}[h]
+    \centering
+    \caption{Average entropy for common protocols}
+    \resizebox{\columnwidth}{!}{
+        \begin{tabular}{|l|lllll|}
+        \hline
+        \multirow{2}{*}{} & \multicolumn{5}{c|}{Protocol Name}                                                                                                   \\ \cline{2-6} 
+                          & \multicolumn{1}{l|}{Shadowsocks} & \multicolumn{1}{l|}{HTTPS} & \multicolumn{1}{l|}{NaiveProxy} & \multicolumn{1}{l|}{Trojan} & Obfs4 \\ \hline
+        Entropy          & \multicolumn{1}{l|}{7.999}      & \multicolumn{1}{l|}{7.977} & \multicolumn{1}{l|}{7.992}      & \multicolumn{1}{l|}{7.858}  & 7.999 \\ \hline
+        \end{tabular}%
+    }
+    \end{table}
+\end{frame}
+
+\subsection{Packet Length}
+\begin{frame}
+    % \frametitle{Packet Length}
+    
+    % \small
+    Packet length is a significant factor in a protocol. Specifically, we should only consider its payload (i.e. Server Data Unit).
+    When using statistical methods to inspect it, an outlier can be remarkable. For example, as is shown in the paper, the Trojan protocol does not adopt a long packet resizing mechanism.
+\begin{figure}[H]
+    \centering
+        \includegraphics[scale=0.45]{pics/occurrence_of_length_trojan.png}
+    \caption{Length-occurrence statistics}
+\end{figure}
+\end{frame}
+
+\subsection{TLS Fingerprinting}
+\begin{frame}
+    % \frametitle{TLS Fingerprinting}
+    
+    \small
+    As the SSL/TLS handshake happens in most plain text, the features of such a connection can be identified. For example, \texttt{TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305\_SHA256} shows cipher suites, both symmetric and asymmetric, hash function, and key exchange algorithm; they are typical TLS fingerprints. Besides, there are further features such as SSL versions and certificates. 
+    All these factors composite a vector that can be categorized by algorithms (machine learning is needed).
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.15]{pics/TLS_Handshake.png}
+        \caption{\small TLS handshaking \cite{TLS_handshake}}
+        \label{fig:fallback}
+    \end{figure}
+\end{frame}
+
+\subsection{SNI/CH technologies}
+\begin{frame}
+    % \frametitle{SNI/CH Technologies}
+
+    In SSL/TLS handshaking processes, there is a remarkable phase, client hello (CH), that provides more information for the server along with TCP/IP 5 tuple and domain name, which will be especially useful when CDN or reverse proxy is enabled.
+    But it is firstly designed without taking privacy into consideration, so the primeval version of CH is in plain text, which exhibits information about the connection and makes the SNI-based block possible.
+    It has successors that try to mitigate the privacy defect, called eSNI and ECH, whose e stands for encrypted, but they are not widely adopted yet.
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.25]{pics/SNI_Block.png}
+        \caption{\small SNI based block \cite{SNI_block}}
+        \label{fig:fallback}
+    \end{figure}
+\end{frame}
+
+
+% \section{Colors}
+% \begin{frame}
+%    \frametitle{An Overview of TUM's Colors}
+%    \tiny{Color blue sRGB 100\%: 0-101-189} \\
+%    \colorbox{tumcolor-blue}{}{}  \\
+%    \vspace{0.5cm}
+%    \tiny{Color green sRGB 100\%: 162-173-0} \\
+%    \colorbox{tumcolor-green}{}{} \\
+%    \vspace{0.5cm}
+%    \tiny{Color light grey sRGB 100\%: 218-215-203} \\
+%    \colorbox{tumcolor-lightgrey}{}{} \\
+%    \vspace{0.5cm}
+%    \tiny{Color orange sRGB 100\%: 227-114-34} \\
+%    \colorbox{tumcolor-orange}{}{} \\
+%    \vspace{0.5cm}
+% \end{frame}
+
+\section{Conclusion}
+\begin{frame}
+    % \frametitle{Conclusion}
+    In conclusion, the central of network censorship circumvention is camouflage or \textbf{collateral freedom}. In practice, both efforts are based on the nature of OSI layers.
+    We can neither cover all the topics nor dive deep into all subdomains. This project gives an overview of these technologies.
+\end{frame}
+
+\section{Afterword}
+\begin{frame}
+    % \frametitle{Afterword}
+    \small
+    After finishing this project, I thought a lot and put some of my thoughts in the afterword out of my selfishness.
+    All technologies will not stay in academia but will finally enter the real world and be entangled with "impure" factors like ethics, society, and the environment.
+    
+    So I believe that as technicians (or technicians in the future), we should have a sense of social responsibility and ethics, especially when we are dealing with technology. And that is what I demand myself.
+
+    After all, I hope that everyone can recognize and understand Freedom of speech (including but not limited to Internet freedom) is all the citizens' right, that can never be deprived.
+
+   \begin{figure}
+      \includegraphics[scale=0.05]{pics/XiaoboLiu_Nobel} 
+      \caption{Dr. Xiaobo Liu, Nobel Peace Prize winner of 2010\cite{Dr_xiaobo_liu}}
+   \end{figure}
+
+\end{frame}
+
+
+
+% \subsection{Code Listings} 
+% % The [fragile] is important for listings!
+% \begin{frame}[fragile]
+%    \frametitle{Don't Ever Bore the Audience with Code Listings}
+%    \lstset{language=C, basicstyle=\small \ttfamily, showspaces=false, showtabs=false, tab= , keywordstyle=\bfseries, showstringspaces=false, framexleftmargin=5mm, frame=single, numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt, texcl=true}
+%    \begin{lstlisting}[caption={Especially when they are erroneous},frame=tlrb]
+% #include <stdio.h>
+
+% int main(void)
+% {
+%   printf("Hallo Welt\n");
+%   while(1);
+%   return 0;
+% }
+%    \end{lstlisting}
+% \end{frame}
+
+% \begin{frame}[allowframebreaks]
+% \frametitle{Bibliography}
+%     \printbibliography
+% \end{frame}
+
+% \end{document}
