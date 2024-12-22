@@ -7,6 +7,8 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
+% Graphic path
+% \graphicspath{{./pics/}}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{orcidlink}
@@ -18,6 +20,9 @@
 \usepackage{textcomp}
 \usepackage{listings}
 \usepackage{subcaption}
+\usepackage[english]{babel}
+\usepackage[autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
 
 \lstset{
     basicstyle=\ttfamily,
@@ -36,7 +41,13 @@
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-
+    
+% \usepackage[
+% backend=biber,
+% style=IEEEtran,
+% sorting=ynt
+% ]{biblatex}
+% \addbibresource{ref.bib}
 \begin{document}
 
 
@@ -64,7 +75,7 @@ The primary idea of restriction is simple: as an Internet service provider (ISP)
 The primary idea of a proxy is also simple: through an external server as a relay (or springboard) to reach the site blocked by the local network.
 
 \section{Related Work}
-There are some existing works that discuss those technologies in specified aspects, such as TLS fingerprinting\cite{TLS_Fingerprinting}, active probing \cite{Active_Probing}, and analysis (or audition) of protocols \cite{shadowsocks_analysis} \cite{Trojan_Probe}. In this article, we intend to give an overview of these technologies with practical examples and real-world scenarios.
+There are some existing works that discuss those technologies in specified aspects, such as TLS fingerprinting\cite{TLS_Fingerprinting}, active probing \cite{Active_Probing}, and analysis (or audition) of protocols \cite{shadowsocks_analysis} \cite{Trojan-Probe}. In this article, we intend to give an overview of these technologies with practical examples and real-world scenarios.
 
 \section{Methodology}
 We analyze typical protocols statically in our cloud servers and visualize the data.
@@ -78,7 +89,7 @@ We chose typical protocols with different ideas:
 \end{enumerate}
 
 \subsection{Set Up Proxy Server}
-We configure the remote proxy server and the corresponding dependencies since most server sides of the TLS-based protocols require an upstream Web Server to forward unauthorized web traffic, which is always considered an active probe. For more details about how it can be utilised by censor in practice, please refer to section \ref{sec:active_detection}.
+We configure the remote proxy server and the corresponding dependencies since most server sides of the TLS-based protocols require an upstream Web Server to forward unauthorized web traffic, which is always considered an active probe. For more details about how it can be utilized by censor in practice, please refer to section \ref{sec:active_detection}.
 To make a TLS-based proxy server work, we must configure the proxy server program, the underlying "fallback" web server, and obtain a SSL certificate. For more about the mechanisms to combat active probing, especially the idea of "fallback", please refer to section \ref{sec:apc}. You can also find the sample configuration file in your repository. %See \ref{sec:config}.
 % We publish the notes and more technical details about the servers' configuration processes in the seminar repository. 
 
@@ -102,16 +113,16 @@ We have made the code available in the seminar repository.
 Almost all firewalls try to restrict only specific traffic, with interference in authorized connections as little as possible, so there is a need for mechanisms to distinguish between valid and invalid connection attempts. 
 
 \subsection{The detection}\label{sec:detection}
-Generally speaking, two kinds of approaches try to achieve this goal: passive tests, which try to analyze the existing data and figure out characteristics and patterns that make a disguised traffic identifiable, and active probes, which use measurements such as replay attack, tampering data, and man-in-the-middle attack. We discuss different approaches that try to distinguish "unauthorized" traffic.
+Generally speaking, two kinds of approaches try to achieve this goal: passive tests, which try to analyze the existing data and figure out characteristics and patterns that make a disguised traffic identifiable, and active probes, which use measurements such as replay attack, tampering data, and man-in-the-middle attack. We discuss different approaches that try to distinguish unauthorized traffic.
 
 \subsection{The Passive Detection}
-Passive detection means that the censor analyzes the traffic that goes through their infrastructures (the "Infrastructures" are often gateways but should not be limited to gateways, for example, they can also use optical splitters to intercept traffic from fibers). When people use network tools such as tcpdump or CharlesProxy\texttrademark{} to check traffic, they do almost the same work with the censor, but beyond the idea, the tools that are adopted by censors can sometimes be much more sophisticated. Traffic can be inspected in multiple OSI Layers. Also, different Protocols can be analyzed with different measurements depending on their characteristics (for example, we can analyze a HTTPS traffic with the help of a MITM Attack).
+Passive detection means that the censor analyzes the traffic that goes through their infrastructures (the Infrastructures are often gateways but should not be limited to gateways, for example, they can also use optical splitters to intercept traffic from fibers). When people use network tools such as tcpdump or CharlesProxy\texttrademark{} to check traffic, they do almost the same work with the censor, but beyond the idea, the tools that are adopted by censors can sometimes be much more sophisticated. Traffic can be inspected in multiple OSI Layers. Also, different Protocols can be analyzed with different measurements depending on their characteristics (for example, we can analyze a HTTPS traffic with the help of a MITM Attack).
 
 \subsubsection{Effort in decryption}
  The most straightforward way to decide whether a connection is valid is to retrieve the carried payload and censor it. But in the age of AEAD (authenticated encryption with associated data) and HTTPS/SSL, it becomes complicated or can only be partially implemented in a very stringent condition like an attack that utilizes a classical vulnerability Heartbleed \cite{Heartbleed}. In most scenarios, it has been patched. 
  \begin{itemize}
     \item  For symmetric-key algorithms, some extremely old encryptions before the advanced encryption standard (AES), such as single DES and RC-4 can be solved in a reasonable time. However, that is not a feasible approach because nowadays, most protocols (both TLS and non-TLS-based) have widely adopted AES algorithms.
-    \item There can be more chances when considering the asymmetric-key exchange phases, which only happen when a TLS-based protocol tries to establish. For example, MITM attack, for more detail about MITM, please refer to section \ref{sec:mitm}, which goes on “Active Probing” since it needs to intercept and tamper packets. Shor’s algorithm \cite{Shors_Algorithm} also provides a possibility to solve the question in polynomial time. Still, due to versatile technical limitations, it is generally not practical (such an existing quantum computer’s capability is like "it could tell you there is 70\% chance 15 = $3\times$5").
+    \item There can be more chances when considering the asymmetric-key exchange phases, which only happen when a TLS-based protocol tries to establish. For example, MITM attack, for more detail about MITM, please refer to section \ref{sec:mitm}, which goes on Active Probing since it needs to intercept and tamper packets. Shor’s algorithm \cite{Shors_Algorithm} also provides a possibility to solve the question in polynomial time. Still, due to versatile technical limitations, it is generally not practical (such an existing quantum computer’s capability is like "it could tell you there is 70\% chance 15 = $3\times$5").
  \end{itemize}
 
 
@@ -221,7 +232,7 @@ Such attacks utilize the nature of the asymmetrical encryption and the key excha
 \begin{figure}[!h]
 \centering
 \input{include/mitm}
-\caption{MITM attack: attacker (M) intercepts messages between client (C) and server (S).}
+\caption{MITM attack: Attacker (M) intercepts messages between client (C) and server (S).}
 \label{fig:mitm}
 % \vspace{-0.2cm}
 \end{figure}
@@ -323,13 +334,13 @@ After the active probing mechanism was revealed, most HTTPS-based protocols adop
 \begin{figure}[!h]
     \centering
     \input{include/fallback}
-    \caption{Fallback: proxy servers filter (P) unauthentic incoming traffic (P) (Probes) and forward it to a real HTTP server (F) and forward authentic traffic (C) to destination (D)}
+    \caption{Fallback: Proxy servers filter (P) unauthentic incoming traffic (P) (Probes) and forward it to a real HTTP Server (F) and forward authentic traffic (C) to destination (D)}
     \label{fig:fallback}
 \end{figure}
 
 \subsection{Conclusion}
-In conclusion, the central of network censorship circumvention is camouflage or \textbf{collateral freedom}. In practice, both sides, efforts of detection and circumvention use a combination of those techniques. For example, a protocol based on TLS should also consider its packet length characteristics. There are still some topics and remarkable technologies I cannot cover, such as identifying protocols with Deep Packet Inspection (DPI) in multiple OSI Layers and machine learning. I thought domain fronting used to be an outstanding idea which is one of the best practices of the idea. 
-TOR provided domain fronting \cite{domainfronting} based meek bridge \cite{meek} before. Due to various factors such as this technology can also be abused to perform stealthy internet attacks, most CDN providers stopped the support. It also exhibits some temporal characteristics. Internet freedom is a significant topic, and though we focus on the technical details in this paper, we should recognize that it needs a collective effort to defend freedom, as it is a citizen's right that cannot be deprived.
+In conclusion, the central of network censorship circumvention is camouflage or \textbf{collateral freedom}. In practice, both sides, efforts of detection and circumvention use a combination of those techniques. For example, a protocol based on TLS should also consider its packet length characteristics. There are still some topics and remarkable technologies I cannot cover, such as identifying protocols with Deep Packet Inspection (DPI) in multiple OSI Layers and machine learning. Domain fronting \cite{domainfronting} used to be an outstanding idea which is one of the best practices of the idea. 
+TOR provided domain-fronting-based meek bridge \cite{meek} before. Due to various factors, such as the fact that this technology can also be abused to perform stealthy internet attacks, most CDN providers stopped the support. It also exhibits some temporal characteristics. Internet freedom is a significant topic, and though we focus on the technical details in this paper, we should recognize that it needs a collective effort to defend freedom, as it is a citizen's right that cannot be deprived.
 
 \bibliographystyle{ieeetr}
 
@@ -337,7 +348,7 @@ TOR provided domain fronting \cite{domainfronting} based meek bridge \cite{meek}
 
 \appendix
 \section{Setting Up Proxy Server}
-In this appendix, we will elaborate on some technical details about our methodology.
+In this appendix, we elaborate on some technical details about our methodology.
 
 \subsection{Software installation}
 To set up a remote proxy server, we need to log in the remote server through SSH and pull corresponding software from their official code repository since that software may not be available in the official package registries of most of the Linux distributions, we might be not able to manage in with package manager. 
@@ -346,10 +357,10 @@ To set up a remote proxy server, we need to log in the remote server through SSH
 For HTTPS-based protocols, we also need to obtain a valid SSL certificate issued by CA (We have discussed why we should not use self-signed certificates). It is possible to use a free SSL certificate that lasts 60 days issued by \href{https://letsencrypt.org/}{Let's Encrypt} or buy one from a CA (usually also a domain registrar), which can be valid longer. For a free SSL certificate, we can also use some tools to automate the process of renewal and installation.
 
 \subsection{Configuration}\label{sec:config}
-We made the sample configuration files available in folder \texttt{resources/config}. For more details, please refer to those projects' documents and the Linux man page or send an email to me.
+We make the sample configuration files available in folder \texttt{resources/config}. For more details, please refer to those projects' documents and the Linux man page or send an email to me.
 
 \appendix
 \section{Data Collection and Analysis}
-We have published the support code and put it in folder \texttt{resources/Code} at the same project. The manual can also be found in \texttt{resources/Manual}.
+We publish the support code and put it in folder \texttt{resources/Code} at the same project. The manual can also be found in \texttt{resources/Manual}.
 
 \end{document}
