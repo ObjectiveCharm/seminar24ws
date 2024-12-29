@@ -172,7 +172,15 @@ For analysis, we use library dpkt \cite{dpkt} and for visualization we use \href
     
 \end{frame}
 
-\section{Topics}
+\section{Detect, filter and categorize traffics}
+\begin{frame}
+    Passive detection analyzes the packets with a combination of multiple factors, such as \textbf{entropy}, \textbf{packet length}, and \textbf{TLS fingerpeints} (If TLS is used).
+    A connection can also be considered and analyzed in the clock domain.
+
+    Active detection furthermore requires the censors to intercept, tamper, and manipulate (mostly replay) packets. Such as sending probes (replaying modified or unmodified previous packets) and trying to implement famous \textbf{Man in the middle attack}.
+\end{frame}
+
+
 \subsection{Entropy}
 \begin{frame}
     % \frametitle{Entropy}
@@ -184,7 +192,7 @@ For analysis, we use library dpkt \cite{dpkt} and for visualization we use \href
     \resizebox{\columnwidth}{!}{
         \begin{tabular}{|l|lllll|}
         \hline
-        \multirow{2}{*}{} & \multicolumn{5}{c|}{Protocol Name}                                                                                                   \\ \cline{2-6} 
+        \multirow{2}{*}{} & \multicolumn{5}{c|}{Protocol Name}                                                                                                   \\ \cline{2-6}
                           & \multicolumn{1}{l|}{Shadowsocks} & \multicolumn{1}{l|}{HTTPS} & \multicolumn{1}{l|}{NaiveProxy} & \multicolumn{1}{l|}{Trojan} & Obfs4 \\ \hline
         Entropy          & \multicolumn{1}{l|}{7.999}      & \multicolumn{1}{l|}{7.977} & \multicolumn{1}{l|}{7.992}      & \multicolumn{1}{l|}{7.858}  & 7.999 \\ \hline
         \end{tabular}%
@@ -195,7 +203,7 @@ For analysis, we use library dpkt \cite{dpkt} and for visualization we use \href
 \subsection{Packet Length}
 \begin{frame}
     % \frametitle{Packet Length}
-    
+
     % \small
     Packet length is a significant factor in a protocol. Specifically, we should only consider its payload (i.e. Server Data Unit).
     When using statistical methods to inspect it, an outlier can be remarkable. For example, as is shown in the paper, the Trojan protocol does not adopt a long packet resizing mechanism.
@@ -209,9 +217,9 @@ For analysis, we use library dpkt \cite{dpkt} and for visualization we use \href
 \subsection{TLS Fingerprinting}
 \begin{frame}
     % \frametitle{TLS Fingerprinting}
-    
+
     \small
-    As the SSL/TLS handshake happens in most plain text, the features of such a connection can be identified. For example, \texttt{TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305\_SHA256} shows cipher suites, both symmetric and asymmetric, hash function, and key exchange algorithm; they are typical TLS fingerprints. Besides, there are further features such as SSL versions and certificates. 
+    As the SSL/TLS handshake happens in most plain text, the features of such a connection can be identified. For example, \texttt{TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305\_SHA256} shows cipher suites, both symmetric and asymmetric, hash function, and key exchange algorithm; they are typical TLS fingerprints. Besides, there are further features such as SSL versions and certificates.
     All these factors composite a vector that can be categorized by algorithms (machine learning is needed).
     \begin{figure}
         \centering
@@ -236,6 +244,42 @@ For analysis, we use library dpkt \cite{dpkt} and for visualization we use \href
     \end{figure}
 \end{frame}
 
+\section{Block technologies}
+\begin{frame}
+    Generally, three ideas for blocking traffic are associated with the nature of network layers.
+    \begin{enumerate}
+        \item Drop packets, the layer 3 approach.
+        \item Reset TCP connections, based on TCP connections' stateful nature.
+        \item DNS pollution, raw DNS implementations without authentication and encryption will be vulnerable.
+    \end{enumerate}
+\end{frame}
+
+\subsection{Factors for blocking designated connections}
+\begin{frame}
+    \begin{itemize}
+        \item Using TCP/IP 5 tuple to specify a connection, as a system administrator does when they write an iptables statement. It is a layer 3 (the Network Layer) and layer 4 (the Transport Layer) based approach.
+        \item Block a connection by SNI utilizes the nature of the HTTPS protocol stack, which lies on layer 7 (the Application Layer). It can also be mitigated with some experimental features such as ESNI and ECH.
+    \end{itemize}
+\end{frame}
+
+\section{Circumvention technologies}
+\begin{frame}
+    As the title says, in the adversary between detection and circumvention, the opposite technologies are always associated with each other, which means they are always designed to combat each other.
+    For passive detection, there are mitigations:
+    \begin{itemize}
+    \item Manipulating the bytes stream in order to combat \textbf{byte sequence analysis}.
+    \item Insert padding bytes in the stream in order to combat \textbf{packet length analysis}.
+    \item Alternating the order of sending packets in order to combat textbf{timing analysis}.
+    \end{itemize}
+
+    For active detection
+    \begin{itemize}
+    \item In order to mitigate \textbf{TLS fingerprinting}, Naiveproxy utilizes the network stack of chromium, which is open source and widely adopted.
+    \item \textbf{Packet Length Analysis} can be combated by padding and dividing packets.
+    \item  With the utilization of Chromium's network stack, Naiveproxy is supposed not to expose any outstanding \textbf{behaviors} that differ from standard behaviors of Chromium.
+\end{itemize}
+
+\end{frame}
 
 % \section{Colors}
 % \begin{frame}
