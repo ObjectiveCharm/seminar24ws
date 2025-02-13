@@ -157,7 +157,7 @@ There was a widely used Shadowsocks’ fork, ShadowsocksR, which tried to imitat
 Behavior is a generic factor that covers the reaction of both client and server in different scenarios: how do they communicate? Do they send heartbeat packets to keep living? What happens in handshake phase? How do they exchange control instruction? These factors allow almost all professional routers to filter connections with OpenVPN or Wireguard protocol. But we focus on proxies such as obfs4 and Shadowsocks because most of the VPNs, together with SSH Tunnels, are not designed to have abilities to bypass censors (We are not going to talk about and consider some modified versions of OpenVPN, which are advertised as capable for censor bypassing, because they are always proprietary and do not follow an open standard). There are also behaviors worth researching and discussing, such as how servers react to active probes, see section \ref{sec:active_detection} "The Active Detection".
 
 \subsubsection{Packet length}
-The length of packets that carry the payload, header, and instructions of the proxy protocol is also a significant feature of protocols. An example is Trojan-gfw, which utilizes the TLS protocol stack but does not resize its packets. This leads to some packets with outstanding extreme lengths. 
+The length of packets that carry the payload, header, and instructions of the proxy protocol is also a significant feature of protocols. An example is Trojan-gfw, which utilizes the TLS protocol stack but does not resize its packets. This leads to characteristics, which has a recognizable pattern in the temporal domain (a burst of long packets).
 The following figures that we depict show the occurrences of length respectively for each protocol. 
 There are also length statistics of standard HTTPS traffic, which can be the control group. Naiveproxy uses padding and packet resizing to mitigate recognizing and categorization in the aspect of packet length. 
 
@@ -181,17 +181,17 @@ There are also length statistics of standard HTTPS traffic, which can be the con
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.40\textwidth}
-        \includegraphics[width=\textwidth, height=4cm]{pics/occurrence_of_length_trojan.png}
+        \includegraphics[width=\textwidth, height=4cm]{pics/temporal_statistic_of_length_trojan.png}
         \caption{Trojan}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.40\textwidth}
-        \includegraphics[width=\textwidth, height=4cm]{pics/occurrence_of_length_https.png}
+        \includegraphics[width=\textwidth, height=4cm]{pics/temporal_statistic_of_length_https.png}
         \caption{HTTPS}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.40\textwidth}
-        \includegraphics[width=\textwidth, height=4cm]{pics/occurrence_of_length_naiveproxy.png}
+        \includegraphics[width=\textwidth, height=4cm]{pics/temporal_statistic_of_length_naiveproxy.png}
         \caption{Naiveproxy}
     \end{subfigure}
     \caption{Length-occurrence statistics}
