@@ -15,7 +15,10 @@ def plot_occurrence_of_length(save_path: PcapAnalyse, **kwargs: os.path):
         hist, bins = occurrence_histogram(analyse, 5)
         # ax.set_xlim([0, max(bins)])
         # ax.set_xticks(np.arange(0, max(bins), 500))
-        ax.hist(hist, bins=bins)
+        ax.hist(hist,
+                bins=bins,
+                color='skyblue',
+                alpha=0.7)
         ax.set_title(f'{protocol_name}')
         ax.set_xlabel('Length')
         ax.set_ylabel('Occurrence')
@@ -26,7 +29,10 @@ def plot_occurrence_of_length(save_path: PcapAnalyse, **kwargs: os.path):
 def plot_single_occurrence_of_length(save_path: os.path, analyse: PcapAnalyse):
     fig, ax = plt.subplots()
     hist, bins = occurrence_histogram(analyse, 5)
-    ax.hist(hist, bins=bins)
+    ax.hist(hist,
+            bins=bins,
+            color='skyblue',
+            alpha=0.7)
     ax.set_title(f'{analyse.protocol_name}')
     ax.set_xlabel('Length')
     ax.set_ylabel('Occurrence')

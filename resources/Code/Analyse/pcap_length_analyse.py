@@ -28,17 +28,17 @@ import numpy as np
 def occurrence_histogram(analyse: PcapAnalyse, delta: int):
     occurrences = []
     for _, payload in analyse.tcp_payload_with_timestamp:
-        occurrences.append(len(payload))
+        l = len(payload)
+        # Filter the zero sized packets
+        if l > 0:
+            occurrences.append(len(payload))
     assert len(occurrences) > 0, f'Unexpected empty TCP payload in {analyse.pcap_file_name}'
     max_l = max(occurrences)
     min_l = min(occurrences)
     # Prepare np array for plotting
-    # The data in first row is length in y-axis
-    # The data in second row is occurrences in x-axis
-    len_bin = trunc((max_l - min_l) / delta)
-    bins = np.linspace(min_l, max_l)
 
-    return np.histogram(occurrences, bins=bins)
+    bins = np.linspace(0, max_l, 60)
+    return occurrences, bins
 
 def temporal_length_array(analysis: PcapAnalyse):
     t = analysis.retrieve_tcp_payload_or_timestamp(Choice.TIME_STAMP)
