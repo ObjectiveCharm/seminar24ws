@@ -1,0 +1,11 @@
+[Unit]
+Description=Install SSL certificate for nginx
+
+[Service]
+Type=oneshot
+ExecStart=/home/acme.sh/CertsRenewal.sh
+User=acme.sh
+Group=www-data
+Environment="MY_EMAIL=<replace_it_with_your_email>"
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,204 @@
+\section{Writing papers with \LaTeX}\label{cheiThu4}
+This section provides a small introduction to writing papers with \LaTeX{}.
+Uniquely label your sections\,/\,subsections, figures or equations.
+You can afterwards reference labeled items.
+Consider sections, figures and tables as proper names, i.\,e., capitalize them
+when referencing, e.\,g.\ Section~\ref{cheiThu4}.
+Equations such as
+\begin{align}
+	\nonumber G(f) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+	g(t)e^{-j\omega ft} \operatorname dt\\
+	&= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} g(t) \left (\cos(2\pi f t)
+	-j\sin(2\pi ft) \right ) \operatorname dt
+	\label{lai6Ohxo}
+\end{align}
+are labeled line by line and referenced by \eqref{lai6Ohxo}.
+Equation~\eqref{lai6Ohxo} is typeset in an align environment, which allows to
+align multiple lines at the same column.
+
+
+\subsection{Units}
+The \texttt{siunitx} package is your best friend when it comes to units.
+It knows virtually any kind of unit such as \si{\kilo\meter}, \si{henry},
+\si{\deci\bel}, and many more.
+You can also use it to consistently typeset values, e.\,g.\ $\SI{1024}{\byte} =
+\SI{1}{\kibi\byte} = \SI{1.024}{\kilo\byte}$.
+You can even write something like $\SI{1000}{packets\per\second}$, and it can
+be used in both text and math modes.
+
+\subsection{Tables and figures}
+Format your tables as shown in Table~\ref{shu1ioKo}.
+\begin{table}
+	\centering
+	\caption{Example for a nice table}
+	\label{shu1ioKo}
+	\begin{tabular}{lllll}
+		\toprule
+		\textbf{SI prefix} & \textbf{Power of 10} && \textbf{Binary prefix} &
+		\textbf{Power of 2}\\
+		\midrule
+		\si{\kilo\nothing} & $10^3$ && \si{\kibi\nothing} & $2^{10}$\\
+		\si{\mega\nothing} & $10^6$ && \si{\mebi\nothing} & $2^{20}$\\
+		\si{\giga\nothing} & $10^9$ && \si{\gibi\nothing} & $2^{30}$\\
+		\si{\tera\nothing} & $10^{12}$ && \si{\tebi\nothing} & $2^{40}$\\
+		\si{\peta\nothing} & $10^{15}$ && \si{\pebi\nothing} & $2^{50}$\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+In contrast to figures, tables have their caption at the top.
+Figure~\ref{Geivap7D} is placed inline by specifying the \texttt{h!} modifier
+in the floating environment.
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[>=latex]
+		\node[client,minimum size=10mm] (1) at (0,0) {};
+		\node[server,minimum size=15mm] (2) at (4,0) {};
+		\draw[->,line width=1pt, bend left] (1.north) to (2.north);
+		\draw[->,line width=1pt, dashed] (2.west) to (1.east);
+	\end{tikzpicture}
+	\caption{A figure made with TikZ}
+	\label{Geivap7D}
+\end{figure}
+Alternatively, you can tell \LaTeX\ to place floats at the top or bottom by
+using the \texttt{t} and \texttt{b} modifiers, respectively.
+You can also include graphic files such as PDF, PNG and JPEG by using
+\texttt{\textbackslash{}includegraphics}.
+However, make sure \textbf{not} to use images with an alpha channel.
+Otherwise, the text of your paper will be rasterized when printed and will look
+really bad.
+
+
+\subsection{Citations}\label{UoQui0le}
+
+You find a list of references at the end of the main file of your paper.
+Add additional bibentries there as needed and cite them using the
+\texttt{\textbackslash{}cite{}} macro.
+
+Verbose citations must be enclosed by quotation marks with a citation
+preceding or following the quoted text.
+If you write a subsection in your own words but it is closely based on some
+source, a citation at the beginning or end of that text block should suffice.
+
+``%
+Please number citations consecutively within brackets~\cite{b1}.
+The sentence punctuation follows the bracket~\cite{b2}.
+Refer simply to the reference number, as in~\cite{b3}---do not use
+'Ref.~\cite{b3}' or 'reference~\cite{b3}' except at the beginning of a
+sentence: 'Reference~\cite{b3} was the first $\ldots$'.'' \cite{b8}.
+
+When you cite other papers for the first time, please list the author's names,
+e.\,g.\ ``\ldots as shown by Jacobs and Bean in~\cite{b3}\ldots''.
+In case there are more than two authors, you may also write ``\ldots as shown
+by Eason et al.\ in~\cite{b1}\ldots'' instead.
+Avoid a line break preceding the brackets by substituting the whitespace
+between the preceding word and the \texttt{\textbackslash{}cite} macro by
+``\textasciitilde{}''.
+
+Invest a significant amount of time into finding the right related work:
+\begin{itemize}
+	\item Prefer scientific sources, i.\,e.\ papers, over websites.
+	\item Do not blindly cite anything.
+	Have a close look at the authors, the date of publications, and where the
+	paper was published.
+	In general, cite older literature first as it is likely to be closer to the
+	original source of a topic.
+	\item Do not hesitate to cite a paper multiple times, or find multiple
+	independent sources for the same statement.
+	However, cite the papers by date of publication.
+	\item You will notice that many papers appear to be published multiple
+	times by the same authors with some timely distance.
+	Find and cite the oldest publication only.
+	An exception may be papers that later appeared in journals as an extended
+	version.
+\end{itemize}
+
+Citing URLs such as \cite{b9} is problematic for two reasons:
+URLs tend to be long and cryptic and---more severe---are volatile, i.\,e.\,
+they tend to break without warning.
+Using services such as \url{archive.org} fix the latter problem but do not make
+URLs more readable.
+In any case, avoid URL shorteners since they represent another point of failure
+and, in addition, hide the link target.
+Consequently, avoid citing URLs whenever possible.
+Some more citations~\cite{b4,b6,b7,b8,b9}.
+
+
+\subsection{Some common mistakes}\label{eiceFe1u}
+\begin{itemize}
+	\item The word ``data'' is plural, not singular.
+%	\item The subscript for the permeability of vacuum $\mu_{0}$, and other
+%	common scientific constants, is zero with subscript formatting, not a
+%	lowercase letter ``o''.
+%	\item In American English, commas, semicolons, periods, question and
+%	exclamation marks are located within quotation marks only when a complete
+%	thought or name is cited, such as a title or full quotation.
+%	When quotation marks are used, instead of a bold or italic typeface, to
+%	highlight a word or phrase, punctuation should appear outside of the
+%	quotation marks.
+%	A parenthetical phrase or statement at the end of a sentence is punctuated
+%	outside of the closing parenthesis (like this). (A parenthetical sentence
+%	is punctuated within the parentheses.)
+%	\item A graph within a graph is an ``inset'', not an ``insert''. The word
+%	alternatively is preferred to the word ``alternately'' (unless you really
+%	mean something that alternates).
+	\item Do not use the word ``essentially'' to mean ``approximately'' or
+	``effectively''.
+%	\item In your paper title, if the words ``that uses'' can accurately
+%	replace the word ``using'', capitalize the ``u''; if not, keep using
+%	lower-cased.
+%	\item Be aware of the different meanings of the homophones ``affect'' and
+%	``effect'', ``complement'' and ``compliment'', ``discreet'' and
+%	``discrete'', ``principal'' and ``principle''.
+%	\item Do not confuse ``imply'' and ``infer''.
+	\item The prefix ``non'' is not a word; it should be joined to the word it
+	modifies, usually without a hyphen.
+	\item There is no period after the ``et'' in the Latin abbreviation ``et
+	al.''.
+	\item The abbreviation ``i.\,e.'' means ``that is'', and the abbreviation
+	``e.\,g.'' means ``for example''.
+	\item The abbreviation ``i.\,e.'' is preceded and followed by commas while
+	``e.\,g.'' is only preceded by a comma.
+	\item Writing $f * g$ does \emph{not} indicate a multiplication but a
+	convolution, and $f \times g$ indicates a cross product.
+	Chances are, you mean and ordinary multiplication, which is simply written
+	as $f \cdot g$.
+	\item In English, the word ``that'' is never preceded by a comma.
+	Writing something like ``The door that is blue \ldots'' uniquely identifies
+	a specific door, while writing ``The door, which is blue \ldots'' merely
+	describes one of many doors.
+	Using the word ``which'' without a preceding comma in the previous example
+	would be equivalent to using ``that''.
+	\item Capitalize all words except for conjunctions like ``and'',
+	``or'' etc.\ in your title and citations---even if others do not.
+	\item Never use short forms such as ``don't''.
+	Write ``do not'' instead.
+	\item Between two headlines subordinate, e.\,g.
+	\texttt{\textbackslash{}section} and \texttt{\textbackslash{}subsection},
+	there must be some text.
+	For instance, you might briefly outline the current section.
+	\item Enumerations and lists consist of at least two items, not one.
+	The same holds for subsections: do not use a subsection if there is only
+	one.
+	\item In English, you keep writing in lower case after a colon.
+	\item The word ``eventually'' has nothing to do with the German word
+	``eventuell''.
+	\item Subordinate clauses starting with ``because'', ``since'', etc.\ are
+	separated from the main clause by a comma only if the subordinate clause
+	precedes the main clause.
+	\item Figures, Tables, Sections etc.\ are considered proper names, i.\,e.\
+	always write ``\ldots as shown in Section~\ref{UoQui0le}''.
+	Make sure to capitalize the noun.
+	An exception are equations.
+	Here, the noun is completely omitted except when an equation is referenced
+	at the beginning of a sentence.
+	See \eqref{lai6Ohxo} at the beginning of Section~\ref{cheiThu4} for an
+	example.
+\end{itemize}
+An excellent style manual for science writers is \cite{b7}.
+
+
+\subsection{How to find symbols in \LaTeX}
+\emph{Detexify} \cite{b9} is an awesome website helping you with finding the
+correct \LaTeX{} macro for hand-written symbols.
+
+
